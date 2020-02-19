@@ -1,0 +1,1703 @@
+/*
+	author: S. M. Shahriar Nirjon
+	last modified: August 8, 2008
+*/
+# include "iGraphics.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include<math.h>
+
+char ar[100];
+int y , a  , c, t;
+double x1,x2,yt1,yt2,xt1,xt2,ytt1,ytt2;
+double exactx1,exactx2,exacty1,exacty2,exactxt1,exactxt2,exactyt1,exactyt2;
+int temp1,temp2,temp3,temp4;
+int m_x = 0, m_y = 0;
+
+int Page=1,len=0,len2=0,len3=0,len4=0,len5=0,len6=0,len7=0,len8=0,len9=0,len10=0,len11=0,len12=0,len13=0;
+char str1[50],str2[50],str3[50],str4[50],str5[50],str6[50],str7[50],str8[50],str9[50],str10[50],str11[50],str12[50],str13[50];
+
+int quad_xx , quad_x , quad_;
+int cubic_xxx, cubic_xx , cubic_x ,cubic_;
+int lin_a, lin_b, lin_c,lin_p, lin_q, lin_r;
+
+
+char g[50];
+char h[20];
+/*
+	function iDraw() is called again and again by the system.
+*/
+int rad = 50;
+/*void drawCar(double x, double y){
+	iFilledRectangle(x,y,100,40);
+}*/
+double v_x = 0,v_y = 30;
+
+bool show_pic = true;
+bool show_main_menu = false;
+bool show_selection_menu = false;
+bool show_quadritic_equation = false;
+bool show_cubic_equation = false;
+bool show_result = false;
+bool show_graph = false;
+bool show_result_2 = false;
+bool go_back=false;
+bool trigo_graph=false;
+bool sin_graph=false;
+bool cos_graph=false;
+bool show_linear_equation=false;
+bool show_result_3=false;
+
+
+
+
+bool cubic_equation_a = false;
+bool cubic_equation_b = false;
+bool cubic_equation_c= false;
+bool cubic_equation_d= false;
+
+void cubic_equation(void)
+{
+	iSetColor(121,157,154);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(251,41,4);
+	iFilledRectangle(250,400,70,70);
+
+	iSetColor(251,41,4);
+	iFilledRectangle(450,400,70,70);
+
+	iSetColor(251,41,4);
+	iFilledRectangle(650,400,70,70);
+
+	iSetColor(251,41,4);
+	iFilledRectangle(850,400,70,70);
+
+	iSetColor(0,0,1);
+	iText(970,430,"= 0",GLUT_BITMAP_TIMES_ROMAN_24);
+
+    iSetColor(251,41,4);
+	iFilledRectangle(250,150,350,100);
+     
+	iSetColor(0,0,1);
+	iText(275,200,"SHOW RESULT",GLUT_BITMAP_TIMES_ROMAN_24); 
+	
+	
+	/*iSetColor(255,0,0);
+	iFilledRectangle(750,150,350,100);
+
+	iSetColor(0,0,1);
+	iText(775,200,"SHOW GRAPH",GLUT_BITMAP_TIMES_ROMAN_24);*/
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1200,650,100,50);
+
+	iSetColor(0,0,0);
+	iText(1220,670,"BACK",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+
+	iText(350,430,"x^3  +",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(550,430,"x^2  +",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(750,430,"x  +",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(270,430,str4,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(470,430,str5,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(670,430,str6,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(870,430,str7,GLUT_BITMAP_TIMES_ROMAN_24);
+}
+
+
+bool quadratic_equation_xx = false;
+bool quadratic_equation_x = false;
+bool quadratic_equation_ = false;
+
+void quadratic_equation(void)
+{
+	iSetColor(121,157,154);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(123,18,218);
+	iFilledRectangle(300,400,70,70);
+
+	iSetColor(123,18,218);
+	iFilledRectangle(500,400,70,70);
+
+	iSetColor(123,18,218);
+	iFilledRectangle(700,400,70,70);
+    
+	iSetColor(0,0,1);
+    iText(850,430,"= 0",GLUT_BITMAP_TIMES_ROMAN_24);
+     
+	iSetColor(123,18,218);
+	iFilledRectangle(250,150,350,100);
+	
+	iSetColor(0,0,1);
+	iText(275,200,"SHOW RESULT",GLUT_BITMAP_TIMES_ROMAN_24);
+
+    /*iSetColor(255,0,0);
+	iFilledRectangle(700,150,350,100);
+
+	iSetColor(0,0,1);
+	iText(725,200,"SHOW GRAPH",GLUT_BITMAP_TIMES_ROMAN_24);*/
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1200,650,100,50);
+
+	iSetColor(0,0,0);
+	iText(1220,670,"BACK",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+	iText(400,430,"x^2  + ",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(600,430,"x  +",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(320,430,str1,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(520,430,str2,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(720,430,str3,GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+
+
+
+}
+
+
+bool linear_equ_a=false;
+bool linear_equ_b=false;
+bool linear_equ_c=false;
+
+
+void linear_equation(void)
+{
+	iSetColor(121,157,154);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(255,164,54);
+	iFilledRectangle(300,400,70,70);
+
+	iSetColor(255,164,54);
+	iFilledRectangle(500,400,70,70);
+
+	iSetColor(255,164,54);
+	iFilledRectangle(700,400,70,70);
+
+	iSetColor(255,164,54);
+	iFilledRectangle(300,290,70,70);
+
+	iSetColor(255,164,54);
+	iFilledRectangle(500,290,70,70);
+
+	iSetColor(255,164,54);
+	iFilledRectangle(700,290,70,70);
+    
+	iSetColor(0,0,1);
+    iText(850,430,"= 0",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(850,320,"= 0",GLUT_BITMAP_TIMES_ROMAN_24);
+     
+	iSetColor(255,164,54);
+	iFilledRectangle(250,150,350,100);
+	
+	iSetColor(0,0,1);
+	iText(275,200,"SHOW RESULT",GLUT_BITMAP_TIMES_ROMAN_24);
+
+    /*iSetColor(255,0,0);
+	iFilledRectangle(700,150,350,100);
+
+	iSetColor(0,0,1);
+	iText(725,200,"SHOW GRAPH",GLUT_BITMAP_TIMES_ROMAN_24);*/
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1200,650,100,50);
+
+	iSetColor(0,0,0);
+	iText(1220,670,"BACK",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+	iText(400,430,"x  + ",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(600,430,"y  +",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(320,430,str8,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(520,430,str9,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(720,430,str10,GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iText(400,320,"x  + ",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(600,320,"y  +",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(320,320,str11,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(520,320,str12,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(720,320,str13,GLUT_BITMAP_TIMES_ROMAN_24);
+
+}
+
+
+char d1[30],d2[30],d3[30];
+
+void result(void){
+
+	//double a1,b1,c1,d1,root1,root2;
+	
+	double x,root1,root2,m1,m2,m3;
+	//int i;
+
+
+	iSetColor(72,123,116);
+	iFilledRectangle(0,0,1366,768);
+
+    iSetColor(143,232,4);
+	iFilledRectangle(400,480,500,120);
+
+	iSetColor(0,0,0);
+	iText(450,550,"The required solution is :",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+
+	/*k = quad_x * quad_x;
+	sprintf(d,"%.3lf",k);
+	iText(700,550,d,GLUT_BITMAP_TIMES_ROMAN_24);
+	*/
+
+
+	 
+        x = quad_x * quad_x - 4 * quad_xx * quad_;
+
+        if(x < 0)
+          {
+            
+
+			  m1 = -quad_x/(2.00*quad_xx); 
+			  m2 = sqrt(-x)/(2*quad_xx);
+			  
+
+			  sprintf(d1,"%.3lf + %.2lfi",m1,m2);
+			  sprintf(d2,"%.3lf - %.2lfi",m1,m2);
+
+			  iText(700,550,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+			  iText(700,510,d2,GLUT_BITMAP_TIMES_ROMAN_24);
+			  
+            //printf("%.3f%+.3fi\n",-quad_x/(2*quad_xx),sqrt(-x)/(2*quad_xx));
+            //printf("%.3f%+.3fi\n",-quad_x/(2*quad_xx),-sqrt(-x)/(2*quad_xx));
+			
+          }
+       else if(x==0)
+        {
+
+           root1 = -quad_x /(2.00* quad_xx);
+           //printf("\nRoot of quadratic equation is: %.3f \n",root1);
+
+		   sprintf(d1,"%.3f",root1);
+
+		   iText(700,550,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+		   iText(700,510,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+        }
+
+       else
+           {
+             //printf("\nRoots are real numbers.\n");
+
+             root1 = ( -quad_x + sqrt(x)) / (2* quad_xx);
+             root2 = ( -quad_x - sqrt(x)) / (2* quad_xx);
+             //printf("\nRoots of quadratic equation are: %.3f , %.3f\n",root1,root2);
+
+			 sprintf(d1,"%.3f",root1);
+			 sprintf(d2,"%.3f",root2);
+
+			 iText(700,550,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+			 iText(700,510,d2,GLUT_BITMAP_TIMES_ROMAN_24);
+
+		
+
+
+			 
+           }
+	   
+	  
+
+	//x = quad_x * quad_x;
+	
+	//printf("%d",x);
+	   	 
+	iSetColor(255,0,0);
+	iFilledRectangle(1100,200,200,75);
+
+	iSetColor(0,0,0);
+	iText(1110,225,"BACK TO MENU",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1100,85,200,75);
+
+	iSetColor(0,0,0);
+	iText(1170,115,"EXIT",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	
+	len=0;
+	len2=0;
+	len3=0;
+
+	
+
+}
+
+
+
+
+void result2(void){
+
+	
+	 double f,g,h,i,j,k,l,m,n,p,x1,x2,x3,R,S,T,T1,U,y1,y2;
+
+
+	iSetColor(72,123,116);
+	iFilledRectangle(0,0,1366,768);
+
+    iSetColor(143,232,4);
+	iFilledRectangle(400,440,500,150);
+
+	iSetColor(0,0,0);
+	iText(450,550,"The required solution is :",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+
+
+
+	f = ((3*cubic_x/cubic_xxx)-((cubic_xx*cubic_xx)/(cubic_xxx*cubic_xxx)))/3.00;
+      g = (((2*cubic_xx*cubic_xx*cubic_xx)/(cubic_xxx*cubic_xxx*cubic_xxx))-((9*cubic_xx*cubic_x)/(cubic_xxx*cubic_xxx))+(27*cubic_/cubic_xxx))/27.00;
+      h = ((g*g)/4)+((f*f*f)/27);
+
+    if(h==0)
+       {
+         x1 = x2 = x3 = (pow((cubic_/cubic_xxx),.34))*(-1);
+
+         //printf("\n1st root is %.3lf\n2nd root is %.3lf\n3rd root is %.3lf\n",x1,x2,x3);
+
+		 sprintf(d1,"%.3lf",x1);
+
+		 iText(700,550,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+		 iText(700,510,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+		 iText(700,470,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+       }
+
+    else if(h<0)
+       {
+         i = pow(((g*g/4)-h),0.5);
+         j = pow(i,0.34);
+         k = acos(-(g/(2*i)));
+         l = j*(-1);
+         m = cos(k/3);
+         n = sqrt(3.0)*sin(k/3);
+         p = (cubic_xx/(3*cubic_xxx))*(-1);
+
+         x1 = (2*j)*cos(k/3)-(cubic_xx/(3*cubic_xxx));
+         x2 = l*(m+n)+p;
+         x3 = l*(m-n)+p;
+
+         //printf("\n1st root is %.3lf\n2nd root is %.3lf\n3rd root is %.3lf\n",x1,x2,x3);
+
+		 sprintf(d1,"%.3lf",x1);
+		 sprintf(d2,"%.3lf",x2);
+		 sprintf(d3,"%.3lf",x3);
+
+		 iText(700,550,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+		 iText(700,510,d2,GLUT_BITMAP_TIMES_ROMAN_24);
+		 iText(700,470,d3,GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+
+       }
+
+     else if(h>0)
+       {
+         R=((-1)*(g/2))+pow(h,0.5);
+         S=pow(R,0.34);
+         T=((-1)*(g/2))-pow(h,0.5);
+         T1=T*(-1);
+         U=pow(T1,0.34);
+         U=U*(-1);
+
+         x1=(S+U)-(cubic_xx/(3.00*cubic_xxx));
+         y1=-(S + U)/2 - (cubic_xx/(3.00*cubic_xxx));
+         y2=((S-U)*(pow(3,0.5)))/2.00;
+
+         //printf("\n1st root is %.3lf\n",x1);
+         //printf("\n2nd root is %.3lf + i*%.3lf \n",y1,y2);
+         //printf("\n3rd root is %.3lf - i*%.3lf \n",y1,y2);
+
+		 sprintf(d1,"%.3lf",x1);
+         sprintf(d2,"%.3lf + %.3lfi",y1,y2);
+         sprintf(d3,"%.3lf - %.3lfi",y1,y2);
+
+		 iText(700,550,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+		 iText(700,510,d2,GLUT_BITMAP_TIMES_ROMAN_24);
+		 iText(700,470,d3,GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+
+        }
+
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1100,200,200,75);
+
+	iSetColor(0,0,0);
+	iText(1110,225,"BACK TO MENU",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1100,85,200,75);
+
+	iSetColor(0,0,0);
+	iText(1170,115,"EXIT",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	len4=0;
+	len5=0;
+	len6=0;
+	len7=0;
+
+
+
+}
+
+
+
+void result3(void){
+
+	iSetColor(72,123,116);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(143,232,4);
+	iFilledRectangle(250,430,1000,150);
+
+	iSetColor(0,0,0);
+	//iText(500,550,"The solution is :",GLUT_BITMAP_TIMES_ROMAN_24);
+	
+double a,b,c,p,q,r,x,y;
+//printf("Enter the coefficents of the first equation of the form ax+by=c\n");
+//scanf("%lf%lf%lf",&a,&b,&c);//The coefficents of the first equation
+//printf("Enter the coefficents of the second equation of the form px+qy=r\n");
+//scanf("%lf%lf%lf",&p,&q,&r);//The coefficents of the second equation
+if(((lin_a*lin_q-lin_p*lin_b)!=0)&&((lin_b*lin_p-lin_q*lin_a)!=0))
+{//In this case we have a unique solution and display x and y
+//printf("The solution to the equations is unique\n");
+x=(lin_c*lin_q-lin_r*lin_b)/(1.0*lin_a*lin_q-lin_p*lin_b);
+y=(lin_c*lin_p-lin_r*lin_a)/(1.0*lin_b*lin_p-lin_q*lin_a);
+//printf("The value of x=%lf\n",x);
+//printf("The value of y=%lf\n",y);
+
+sprintf(d1,"x = %lf",x);
+sprintf(d2,"y = %lf",y);
+
+    iSetColor(0,0,0);
+	iText(500,550,"The solution is :",GLUT_BITMAP_TIMES_ROMAN_24);
+    iText(700,550,d1,GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(700,510,d2,GLUT_BITMAP_TIMES_ROMAN_24);
+}
+else
+if(((lin_a*lin_q-lin_p*lin_b)==0)&&((lin_b*lin_p-lin_q*lin_a)==0)&&((lin_c*lin_q-lin_r*lin_b)==0)&&((lin_c*lin_p-lin_r*lin_a)==0))//In such condition we can have infinitely many solutions to the equation.
+{//When we have such a condition than mathematically we can choose any one unknown as free and other unknown can be calculated using the free variables's value.
+//So we choose x as free variable and then get y
+    //printf("Infinitely many solutions are possible\n");
+    //printf("The value of x can be varied and y can be calculated according to x's value using relation\n");
+
+	iSetColor(0,0,0);
+    iText(300,550,"Infinitely many solutions are possible",GLUT_BITMAP_TIMES_ROMAN_24);
+	iText(300,510,"The value of x can be varied and y can be calculated according to x's value using relation",GLUT_BITMAP_TIMES_ROMAN_24);
+    //printf("y=%lf+(%lf)x",(lin_c/lin_b),(-1.0*lin_a/lin_b));
+	a = (1.0*lin_c/lin_b);
+	b = (-1.0*lin_a/lin_b);
+	sprintf(d3,"y=%lf+%lfx",a,b);
+
+	iSetColor(0,0,0);
+	iText(300,450,d3,GLUT_BITMAP_TIMES_ROMAN_24);
+}
+
+else
+if(((lin_a*lin_q-lin_p*lin_b)==0)&&((lin_b*lin_p-lin_q*lin_a)==0)&&((lin_c*lin_q-lin_r*lin_b)!=0)&&((lin_c*lin_p-lin_r*lin_a)!=0))//In such condition no solutions are possible.
+//printf("No solutions are possible\n");
+{iSetColor(0,0,0);
+iText(700,550,"No solutions are possible",GLUT_BITMAP_TIMES_ROMAN_24);
+
+}
+
+    
+	iSetColor(255,0,0);
+	iFilledRectangle(1100,200,200,75);
+
+	iSetColor(0,0,0);
+	iText(1110,225,"BACK TO MENU",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1100,85,200,75);
+
+	iSetColor(0,0,0);
+	iText(1170,115,"EXIT",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+	len8=0;
+	len9=0;
+	len10=0;
+	len11=0;
+	len12=0;
+	len13=0;
+
+
+
+}
+
+
+void graph(void){
+
+	iSetColor(42,192,82);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(0,0,0);
+	iLine(683,0,683,768);
+
+	iSetColor(0,0,0);
+	iLine(0,384,1366,384);
+
+
+	iSetColor(0,0,0);
+	iLine(exactx1,exacty1,exactx2,exacty2);
+
+	iSetColor(0,0,0);
+	iLine(exactxt1,exactyt1,exactxt2,exactyt2);
+
+}
+
+
+void selection_menu(void)
+{
+	iSetColor(72,123,116);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(123,18,218);
+	iFilledRectangle(400,650,500,80);
+
+	iSetColor(0,0,1);
+	iText(410,680,"CLICK HERE FOR QUADRATIC EQUATION",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iSetColor(251,41,4);
+	iFilledRectangle(400,500,500,80);
+
+	iSetColor(0,0,1);
+	iText(440,535,"CLICK HERE FOR CUBIC EQUATION",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iSetColor(65,224,12);
+	iFilledRectangle(400,350,500,80);
+
+	iSetColor(0,0,1);
+	iText(490,385,"TRIGONOMETRIC GRAPH",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iSetColor(255,164,54);
+	iFilledRectangle(400,200,500,80);
+
+	iSetColor(0,0,1);
+	iText(440,235,"CLICK HERE FOR LINEAR EQUATION",GLUT_BITMAP_TIMES_ROMAN_24);
+
+}
+
+
+
+void main_menu(void){
+
+	iSetColor(72,123,116);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(72,35,182);
+	iFilledRectangle(400,430,460,100);
+
+	iSetColor(0,0,0);
+	iText(450,470,"CLICK HERE FOR NEXT MENU",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+}
+
+
+void trigonometric(void){
+
+	iSetColor(121,157,154);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(65,224,12);
+	iFilledRectangle(510,600,190,60);
+
+	iSetColor(0,0,0);
+	iText(530,625,"y = sinx  graph",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iSetColor(65,224,12);
+	iFilledRectangle(510,460,190,60);
+
+	iSetColor(0,0,0);
+	iText(530,485,"y = cosx  graph",GLUT_BITMAP_TIMES_ROMAN_24);
+
+
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1200,650,100,50);
+
+	iSetColor(0,0,0);
+	iText(1220,670,"BACK",GLUT_BITMAP_TIMES_ROMAN_24);
+
+}
+
+
+void sinGraph(){
+
+	iSetColor(121,157,154);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(0,0,0);
+	iLine(683,0,683,768);
+
+	iSetColor(0,0,0);
+	iLine(0,384,1366,384);
+
+	iSetColor(0,0,0);
+	iLine(675,474,691,474);
+	iText(672,462,"1");
+
+	iSetColor(0,0,0);
+	iLine(675,294,691,294);
+	iText(665,282,"-1");
+
+
+	//1st wave...
+
+	iSetColor(0,0,0);
+	iLine(683,384,688,394);
+	iLine(688,394,693,404);
+	iLine(693,404,698,414);
+	iLine(698,414,703,424);
+	iLine(703,424,708,434);
+	iLine(708,434,713,444);
+	iLine(713,444,718,454);
+	iLine(718,454,723,464);
+
+	iLine(723,464,733,474);
+	iLine(733,474,743,464);
+
+	iLine(743,464,748,454);
+	iLine(748,454,753,444);
+	iLine(753,444,758,434);
+	iLine(758,434,763,424);
+	iLine(763,424,768,414);
+	iLine(768,414,773,404);
+	iLine(773,404,778,394);
+	iLine(778,394,783,384);
+
+
+
+	iLine(783,384,788,374);
+	iLine(788,374,793,364);
+	iLine(793,364,798,354);
+	iLine(798,354,803,344);
+	iLine(803,344,808,334);
+	iLine(808,334,813,324);
+	iLine(813,324,818,314);
+	iLine(818,314,823,304);
+
+	iLine(823,304,833,294);
+	iLine(833,294,843,304);
+
+	iLine(843,304,848,314);
+	iLine(848,314,853,324);
+	iLine(853,324,858,334);
+	iLine(858,334,863,344);
+	iLine(863,344,868,354);
+	iLine(868,354,873,364);
+	iLine(873,364,878,374);
+	iLine(878,374,883,384);
+
+
+
+	//2nd wave...
+
+	iLine(883,384,888,394);
+	iLine(888,394,893,404);
+	iLine(893,404,898,414);
+	iLine(898,414,903,424);
+	iLine(903,424,908,434);
+	iLine(908,434,913,444);
+	iLine(913,444,918,454);
+	iLine(918,454,923,464);
+
+	iLine(923,464,933,474);
+	iLine(933,474,943,464);
+
+	iLine(943,464,948,454);
+	iLine(948,454,953,444);
+	iLine(953,444,958,434);
+	iLine(958,434,963,424);
+	iLine(963,424,968,414);
+	iLine(968,414,973,404);
+	iLine(973,404,978,394);
+	iLine(978,394,983,384);
+
+
+
+	iLine(983,384,988,374);
+	iLine(988,374,993,364);
+	iLine(993,364,998,354);
+	iLine(998,354,1003,344);
+	iLine(1003,344,1008,334);
+	iLine(1008,334,1013,324);
+	iLine(1013,324,1018,314);
+	iLine(1018,314,1023,304);
+
+	iLine(1023,304,1033,294);
+	iLine(1033,294,1043,304);
+
+	iLine(1043,304,1048,314);
+	iLine(1048,314,1053,324);
+	iLine(1053,324,1058,334);
+	iLine(1058,334,1063,344);
+	iLine(1063,344,1068,354);
+	iLine(1068,354,1073,364);
+	iLine(1073,364,1078,374);
+	iLine(1078,374,1083,384);
+
+
+	//3rd wave...
+
+	iLine(1083,384,1088,394);
+	iLine(1088,394,1093,404);
+	iLine(1093,404,1098,414);
+	iLine(1098,414,1103,424);
+	iLine(1103,424,1108,434);
+	iLine(1108,434,1113,444);
+	iLine(1113,444,1118,454);
+	iLine(1118,454,1123,464);
+
+	iLine(1123,464,1133,474);
+	iLine(1133,474,1143,464);
+
+	iLine(1143,464,1148,454);
+	iLine(1148,454,1153,444);
+	iLine(1153,444,1158,434);
+	iLine(1158,434,1163,424);
+	iLine(1163,424,1168,414);
+	iLine(1168,414,1173,404);
+	iLine(1173,404,1178,394);
+	iLine(1178,394,1183,384);
+
+
+
+	iLine(1183,384,1188,374);
+	iLine(1188,374,1193,364);
+	iLine(1193,364,1198,354);
+	iLine(1198,354,1203,344);
+	iLine(1203,344,1208,334);
+	iLine(1208,334,1213,324);
+	iLine(1213,324,1218,314);
+	iLine(1218,314,1223,304);
+
+	iLine(1223,304,1233,294);
+	iLine(1233,294,1243,304);
+
+	iLine(1243,304,1248,314);
+	iLine(1248,314,1253,324);
+	iLine(1253,324,1258,334);
+	iLine(1258,334,1263,344);
+	iLine(1263,344,1268,354);
+	iLine(1268,354,1273,364);
+	iLine(1273,364,1278,374);
+	iLine(1278,374,1283,384);
+
+	//4th wave...
+
+	iLine(1283,384,1288,394);
+	iLine(1288,394,1293,404);
+	iLine(1293,404,1298,414);
+	iLine(1298,414,1303,424);
+	iLine(1303,424,1308,434);
+	iLine(1308,434,1313,444);
+	iLine(1313,444,1318,454);
+	iLine(1318,454,1323,464);
+
+	iLine(1323,464,1333,474);
+	iLine(1333,474,1343,464);
+
+	iLine(1343,464,1348,454);
+	iLine(1348,454,1353,444);
+	iLine(1353,444,1358,434);
+	iLine(1358,434,1363,424);
+	iLine(1363,424,1368,414);
+
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1200,650,100,50);
+
+	iSetColor(0,0,0);
+	iText(1220,670,"BACK",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1100,85,200,75);
+
+	iSetColor(0,0,0);
+	iText(1170,115,"EXIT",GLUT_BITMAP_TIMES_ROMAN_24);
+
+}
+
+
+void cosGraph(){
+
+	iSetColor(121,157,154);
+	iFilledRectangle(0,0,1366,768);
+
+	iSetColor(0,0,0);
+	iLine(683,0,683,768);
+
+	iSetColor(0,0,0);
+	iLine(0,384,1366,384);
+
+
+	iSetColor(0,0,0);
+	iLine(675,474,691,474);
+	iText(672,462,"1");
+
+	iSetColor(0,0,0);
+	iLine(675,294,691,294);
+	iText(665,282,"-1");
+	
+	iSetColor(0,0,0);
+	
+	iLine(683,474,693,464);
+
+	iLine(693,464,698,454);
+	iLine(698,454,703,444);
+	iLine(703,444,708,434);
+	iLine(708,434,713,424);
+	iLine(713,424,718,414);
+	iLine(718,414,723,404);
+	iLine(723,404,728,394);
+	iLine(728,394,733,384);
+
+
+
+	iLine(733,384,738,374);
+	iLine(738,374,743,364);
+	iLine(743,364,748,354);
+	iLine(748,354,753,344);
+	iLine(753,344,758,334);
+	iLine(758,334,763,324);
+	iLine(763,324,768,314);
+	iLine(768,314,773,304);
+
+	iLine(773,304,783,294);
+	iLine(783,294,793,304);
+
+	iLine(793,304,798,314);
+	iLine(798,314,803,324);
+	iLine(803,324,808,334);
+	iLine(808,334,813,344);
+	iLine(813,344,818,354);
+	iLine(818,354,823,364);
+	iLine(823,364,828,374);
+	iLine(828,374,833,384);
+
+
+
+	//2nd wave...
+
+	iLine(833,384,838,394);
+	iLine(838,394,843,404);
+	iLine(843,404,848,414);
+	iLine(848,414,853,424);
+	iLine(853,424,858,434);
+	iLine(858,434,863,444);
+	iLine(863,444,868,454);
+	iLine(868,454,873,464);
+
+	iLine(873,464,883,474);
+	iLine(883,474,893,464);
+
+	iLine(893,464,898,454);
+	iLine(898,454,903,444);
+	iLine(903,444,908,434);
+	iLine(908,434,913,424);
+	iLine(913,424,918,414);
+	iLine(918,414,923,404);
+	iLine(923,404,928,394);
+	iLine(928,394,933,384);
+
+
+
+	iLine(933,384,938,374);
+	iLine(938,374,943,364);
+	iLine(943,364,948,354);
+	iLine(948,354,953,344);
+	iLine(953,344,958,334);
+	iLine(958,334,963,324);
+	iLine(963,324,968,314);
+	iLine(968,314,973,304);
+
+	iLine(973,304,983,294);
+	iLine(983,294,993,304);
+
+	iLine(993,304,998,314);
+	iLine(998,314,1003,324);
+	iLine(1003,324,1008,334);
+	iLine(1008,334,1013,344);
+	iLine(1013,344,1018,354);
+	iLine(1018,354,1023,364);
+	iLine(1023,364,1028,374);
+	iLine(1028,374,1033,384);
+
+
+	//3rd wave...
+
+	iLine(1033,384,1038,394);
+	iLine(1038,394,1043,404);
+	iLine(1043,404,1048,414);
+	iLine(1048,414,1053,424);
+	iLine(1053,424,1058,434);
+	iLine(1058,434,1063,444);
+	iLine(1063,444,1068,454);
+	iLine(1068,454,1073,464);
+
+	iLine(1073,464,1083,474);
+	iLine(1083,474,1093,464);
+
+	iLine(1093,464,1098,454);
+	iLine(1098,454,1103,444);
+	iLine(1103,444,1108,434);
+	iLine(1108,434,1113,424);
+	iLine(1113,424,1118,414);
+	iLine(1118,414,1123,404);
+	iLine(1123,404,1128,394);
+	iLine(1128,394,1133,384);
+
+
+
+	iLine(1133,384,1138,374);
+	iLine(1138,374,1143,364);
+	iLine(1143,364,1148,354);
+	iLine(1148,354,1153,344);
+	iLine(1153,344,1158,334);
+	iLine(1158,334,1163,324);
+	iLine(1163,324,1168,314);
+	iLine(1168,314,1173,304);
+
+	iLine(1173,304,1183,294);
+	iLine(1183,294,1193,304);
+
+	iLine(1193,304,1198,314);
+	iLine(1198,314,1203,324);
+	iLine(1203,324,1208,334);
+	iLine(1208,334,1213,344);
+	iLine(1213,344,1218,354);
+	iLine(1218,354,1223,364);
+	iLine(1223,364,1228,374);
+	iLine(1228,374,1233,384);
+
+	iLine(1233,384,1238,394);
+	iLine(1238,394,1243,404);
+	iLine(1243,404,1248,414);
+	iLine(1248,414,1253,424);
+	iLine(1253,424,1258,434);
+	iLine(1258,434,1263,444);
+	iLine(1263,444,1268,454);
+	iLine(1268,454,1273,464);
+
+	iLine(1273,464,1283,474);
+	iLine(1283,474,1293,464);
+
+	iLine(1293,464,1298,454);
+	iLine(1298,454,1303,444);
+	iLine(1303,444,1308,434);
+	iLine(1308,434,1313,424);
+	iLine(1313,424,1318,414);
+	iLine(1318,414,1323,404);
+	iLine(1323,404,1328,394);
+	iLine(1328,394,1333,384);
+
+	iLine(1333,384,1338,374);
+	iLine(1338,374,1343,364);
+	iLine(1343,364,1348,354);
+	iLine(1348,354,1353,344);
+	iLine(1353,344,1358,334);
+	iLine(1358,334,1363,324);
+	iLine(1363,324,1368,314);
+
+
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1200,650,100,50);
+
+	iSetColor(0,0,0);
+	iText(1220,670,"BACK",GLUT_BITMAP_TIMES_ROMAN_24);
+
+	iSetColor(255,0,0);
+	iFilledRectangle(1100,85,200,75);
+
+	iSetColor(0,0,0);
+	iText(1170,115,"EXIT",GLUT_BITMAP_TIMES_ROMAN_24);
+
+}
+
+
+
+void picture(void){
+
+	iSetColor(66,206,189);
+	iFilledRectangle(0,0,1366,768);
+
+	//iShowBMP(0,0,"eqtnpic.BMP");
+
+	iSetColor(0,0,0);
+	iText(580,450,"* * * * EQUATION",GLUT_BITMAP_HELVETICA_18);
+	iText(680,400,"SOLVER * * * *",GLUT_BITMAP_HELVETICA_18);
+	iText(250,660,"_____________________________________________________________________________________",GLUT_BITMAP_HELVETICA_18);
+	iText(240,620,"________________________________",GLUT_BITMAP_HELVETICA_18);
+	iText(800,620,"________________________________",GLUT_BITMAP_HELVETICA_18);
+
+	iText(250,220,"_____________________________________________________________________________________",GLUT_BITMAP_HELVETICA_18);
+	iText(240,260,"________________________________",GLUT_BITMAP_HELVETICA_18);
+	iText(800,260,"________________________________",GLUT_BITMAP_HELVETICA_18);
+}
+
+
+
+void iDraw()
+{
+	
+	iClear();
+
+	if(Page==1){
+    if(show_pic==true)picture();
+	if(show_main_menu==true)main_menu();
+	if(show_selection_menu==true)selection_menu();
+	if(show_quadritic_equation==true)quadratic_equation();
+	if(show_cubic_equation==true)cubic_equation();
+	if(show_result==true)result();
+	//if(show_graph==true)graph();
+	if(show_result_2==true)result2();
+	if(trigo_graph==true)trigonometric();
+	if(sin_graph==true)sinGraph();
+	if(cos_graph==true)cosGraph();
+	if(show_linear_equation==true)linear_equation();
+	if(show_result_3==true)result3();
+	
+    
+	}
+/*	v_x+=15;_
+	if(v_x > 500) v_x = -100;
+	drawCar(v_x,v_y);
+	iDelayMS(20);
+	/*rad += 5 ;
+	if(rad >= 150) rad = 50;
+	iSetColor(255,255,255);
+	iFilledCircle(250,250,rad,200);
+	iSetColor(rad,rad,rad);
+	iText(m_x,m_y,"Hello, first progeam");
+	*/
+}
+
+
+
+/*
+	function iMouseMove() is called when the user presses and drags the mouse.
+	(mx, my) is the position where the mouse pointer is.
+*/
+void iMouseMove(int mx, int my)
+{
+	//place your codes here
+	//printf("%d      %d",mx,my);
+}
+
+/*
+	function iMouse() is called when the user presses/releases the mouse.
+	(mx, my) is the position where the mouse pointer is.
+*/
+
+void iMouse(int button, int state, int mx, int my)
+{
+	//printf("Button Number %d %d\n", button,state);
+	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		//printf("%d      %d",mx,my);
+}
+	
+
+	if(mx>=1200&&mx<=1300&&my>=650&&my<=700&&sin_graph==true){
+
+		    sin_graph=false;
+			trigo_graph=true;
+		
+	}
+
+	if(mx>=1200&&mx<=1300&&my>=650&&my<=700&&cos_graph==true){
+
+		    cos_graph=false;
+			trigo_graph=true;
+			
+		
+	}
+
+
+	if(mx>=1200&&mx<=1300&&my>=650&&my<=700&&show_quadritic_equation==true){
+
+		    //show_pic=false;
+			//show_main_menu=true;
+		show_quadritic_equation=false;
+			show_selection_menu=true;
+		
+	}
+
+	if(mx>=1200&&mx<=1300&&my>=650&&my<=700&&show_cubic_equation==true){
+
+		    //show_pic=false;
+			//show_main_menu=true; ,            
+		show_cubic_equation=false;
+			show_selection_menu=true;
+		
+	}
+
+
+	if(mx>=1200&&mx<=1300&&my>=650&&my<=700&&trigo_graph==true){
+
+		    //show_pic=false;
+			//show_main_menu=true;
+		    trigo_graph=false;
+			show_selection_menu=true;
+		
+	}
+
+
+	if(mx>=510&&mx<=700&&my>=600&&my<=660&&trigo_graph==true){
+
+		    trigo_graph=false;
+			sin_graph=true;
+		
+	}
+
+
+	if(mx>=510&&mx<=700&&my>=460&&my<=520&&trigo_graph==true){
+
+		    trigo_graph=false;
+			cos_graph=true;
+		
+	}
+
+
+	if(mx>=1200&&mx<=1300&&my>=650&&my<=700&&show_linear_equation==true){
+
+		    //show_pic=false;
+			//show_main_menu=true; ,            
+		show_linear_equation=false;
+			show_selection_menu=true;
+		
+	}
+	
+	   if(mx>=0&&mx<=1366&&my>=0&&my<=768&&show_pic==true&&show_main_menu==false){
+
+		    show_pic=false;
+			
+			show_main_menu=true;
+
+		
+	}
+
+
+		if(mx>=400&&mx<=860&&my>=430&&my<=530&&show_main_menu==true){
+
+			show_main_menu=false;
+			show_selection_menu = true;
+			show_linear_equation=false;
+			show_cubic_equation=false;
+			show_quadritic_equation=false;
+			
+			
+			
+			//printf("%d      %d\n",mx,my);
+
+			//printf("YES");
+		
+}
+
+		if(mx>=400&&mx<=900&&my>=650&&my<=730&&show_selection_menu==true){
+
+			show_main_menu=false;
+			show_selection_menu = false;
+			show_quadritic_equation = true;
+		    
+			//printf("%d      %d",mx,my);
+
+			//quadratic_equation();
+			//printf("YES");
+		}
+		if(mx>=400&&mx<=900&&my>=500&&my<=580&&show_selection_menu==true){
+
+			show_main_menu=false;
+			show_selection_menu = false;
+			show_quadritic_equation = false;
+			show_cubic_equation = true;
+		
+	}
+
+		if(mx>=400&&mx<=900&&my>=350&&my<=430&&show_selection_menu==true){
+
+			show_main_menu=false;
+			show_selection_menu = false;
+			show_quadritic_equation = false;
+			show_cubic_equation = false;
+			trigo_graph = true;
+		
+	}
+
+		if(mx>=400&&mx<=900&&my>=200&&my<=280&&show_selection_menu==true){
+
+			show_selection_menu = false;
+			show_linear_equation = true;
+		
+	}
+		if(mx>700&&mx<1050&&my>150&&my<250&&show_linear_equation==true){
+
+			show_graph = true;
+		}
+
+
+		if(mx>=250&&mx<=600&&my>=150&&my<=250 && show_cubic_equation==true){
+
+			//show_main_menu=false;
+			//show_selection_menu = false;
+			//show_quadritic_equation = false;
+			//show_cubic_equation = false;
+
+			show_result_2 = true;
+
+			cubic_xxx=atoi(str4);
+			cubic_xx=atoi(str5);
+			cubic_x=atoi(str6);
+			cubic_=atoi(str7);
+			
+		
+	}
+		/*if(mx>=750&&mx<=1100&&my>=150&&my<=250 && show_cubic_equation==true){
+
+			show_graph = true;
+		}*/
+
+		if(mx>=250&&mx<=600&&my>=150&&my<=250 && show_quadritic_equation==true){
+
+			show_linear_equation=false;
+			show_result = true;
+
+			quad_xx = atoi(str1);
+			quad_x = atoi(str2);
+			quad_ = atoi(str3);
+			
+
+	}
+
+		/*if(mx>=750&&mx<=1100&&my>=150&&my<=250 && show_quadritic_equation==true){
+
+			show_graph = true;
+		}*/
+
+		if(mx>=300&&mx<=370&&my>=400&&my<=470 && show_quadritic_equation==true){
+
+			quadratic_equation_xx=true;
+			quadratic_equation_x=false;
+			quadratic_equation_=false;
+			
+			
+		}
+		
+		if(mx>=500&&mx<=570&&my>=400&&my<=470 && show_quadritic_equation==true){
+
+			quadratic_equation_xx=false;
+			quadratic_equation_x=true;
+			quadratic_equation_=false;
+			
+			
+		}
+		
+		if(mx>=700&&mx<=770&&my>=400&&my<=470 && show_quadritic_equation==true){
+
+			quadratic_equation_xx=false;
+			quadratic_equation_x=false;
+			quadratic_equation_=true;
+		}
+
+	    if(mx>=250&&mx<=320&&my>=400&&my<=470 && show_cubic_equation==true){
+
+			//show_graph = true;
+			cubic_equation_a = true;
+            cubic_equation_b = false;
+            cubic_equation_c= false;
+            cubic_equation_d= false;
+
+		}
+
+		if(mx>=450&&mx<=520&&my>=400&&my<=470 && show_cubic_equation==true){
+
+			//show_graph = true;
+			cubic_equation_a = false;
+            cubic_equation_b = true;
+            cubic_equation_c= false;
+            cubic_equation_d= false;
+
+		}
+
+        if(mx>=650&&mx<=720&&my>=400&&my<=470 && show_cubic_equation==true){
+
+			//show_graph = true;
+			cubic_equation_a = false;
+            cubic_equation_b = false;
+            cubic_equation_c= true;
+            cubic_equation_d= false;
+
+		}
+         
+		if(mx>=850&&mx<=920&&my>=400&&my<=470 && show_cubic_equation==true){
+
+			//show_graph = true;
+			cubic_equation_a = false;
+            cubic_equation_b = false;
+            cubic_equation_c= false;
+            cubic_equation_d= true;
+
+		}
+
+		if(mx>=1100&&mx<=1300&&my>=200&&my<=275&&show_result_2==true&&show_linear_equation==false){
+
+		    //show_pic=false;
+			//show_main_menu=true; ,            
+		    show_result_2=false;
+			show_cubic_equation=false;
+		    show_selection_menu=true;
+			show_linear_equation=false;
+		
+	}
+		if(mx>=1100&&mx<=1300&&my>=200&&my<=275&&show_result==true){
+
+		    //show_pic=false;
+			//show_main_menu=true; ,            
+		    show_result=false;
+			show_quadritic_equation=false;
+		    show_selection_menu=true;
+		    show_linear_equation=false;
+	
+		}
+
+
+		if(mx>=250&&mx<=600&&my>=150&&my<=250 && show_linear_equation==true){
+
+			show_result_3 = true;
+
+			lin_a = atoi(str8);
+			lin_b = atoi(str9);
+			lin_c = atoi(str10);
+			lin_p = atoi(str11);
+			lin_q = atoi(str12);
+			lin_r = atoi(str13);
+			
+			yt1 = -200;
+			x1  = (- lin_b*yt1 - lin_c)/lin_a; 
+			
+
+			exactx1=683+x1;
+			exacty1=384+yt1;
+			printf("%lf %lf\n",exactx1,exactx2);
+
+			yt2 = 300;
+			x2  = (- lin_b*yt2 - lin_c)/lin_a; 
+			
+
+			exactx2=683+x2;
+			exacty2=384+yt2;
+
+
+			ytt1 = -300;
+			xt1  = (- lin_q*ytt1 - lin_r)/lin_p; 
+			
+
+			exactxt1=683+xt1;
+			exactyt1=384+ytt1;
+			printf("%lf %lf\n",exactx1,exactx2);
+
+			ytt2 = 300;
+			xt2  = (- lin_q*ytt2 - lin_r)/lin_p; 
+			
+
+			exactxt2=683+xt2;
+			exactyt2=384+ytt2;
+
+	}
+
+		if(mx>=300&&mx<=370&&my>=400&&my<=470 && show_linear_equation==true){
+
+			lin_a=true;
+			lin_b=false;
+			lin_c=false;
+			lin_p=false;
+			lin_q=false;
+			lin_r=false;
+			
+			
+		}
+		
+		if(mx>=500&&mx<=570&&my>=400&&my<=470 && show_linear_equation==true){
+
+			lin_a=false;
+			lin_b=true;
+			lin_c=false;
+			lin_p=false;
+			lin_q=false;
+			lin_r=false;
+			
+		}
+		
+		if(mx>=700&&mx<=770&&my>=400&&my<=470 && show_linear_equation==true){
+
+			lin_a=false;
+			lin_b=false;
+			lin_c=true;
+			lin_p=false;
+			lin_q=false;
+			lin_r=false;
+		}
+
+		if(mx>=300&&mx<=370&&my>=290&&my<=360 && show_linear_equation==true){
+
+			lin_a=false;
+			lin_b=false;
+			lin_c=false;
+			lin_p=true;
+			lin_q=false;
+			lin_r=false;
+			
+		}
+		
+		if(mx>=500&&mx<=570&&my>=290&&my<=360 && show_linear_equation==true){
+
+			lin_a=false;
+			lin_b=false;
+			lin_c=false;
+			lin_p=false;
+			lin_q=true;
+			lin_r=false;
+			
+			
+		}
+		
+		if(mx>=700&&mx<=770&&my>=290&&my<=360 && show_linear_equation==true){
+
+			lin_a=false;
+			lin_b=false;
+			lin_c=false;
+			lin_p=false;
+			lin_q=false;
+			lin_r=true;
+		}
+
+		if(mx>=1100&&mx<=1300&&my>=200&&my<=275&&show_result_3==true){
+
+		    //show_pic=false;
+			//show_main_menu=true; ,            
+		    show_result_3=false;
+			show_quadritic_equation=false;
+		    show_selection_menu=true;
+		    show_linear_equation=false;
+	
+		}
+
+		
+    
+		
+		if(mx>=1100&&mx<=1300&&my>=85&&my<=160&&show_result==true){
+			exit(0);
+		}
+
+
+		if(mx>=1100&&mx<=1300&&my>=85&&my<=160&&show_result_2==true){
+			exit(0);
+		}
+		
+
+		if(mx>=1100&&mx<=1300&&my>=85&&my<=160&&show_result_3==true){
+			exit(0);
+		}
+
+
+		if(mx>=1100&&mx<=1300&&my>=85&&my<=160&&sin_graph==true){
+			exit(0);
+		}
+
+
+		if(mx>=1100&&mx<=1300&&my>=85&&my<=160&&cos_graph==true){
+			exit(0);
+		}
+		
+		
+		if(button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+	{
+		//place your codes here
+	}
+}
+
+/*
+	function iPassiveMouseMove is called when user hovers the mouse pointer in the screen
+	(mx,my) is the coordinate of mouse pointer
+*/
+void iPassiveMouseMove(int mx,int my){
+	//printf("%d %d\n",mx,my);
+	m_x = mx;
+	m_y = my;
+}
+
+/*
+	function iKeyboard() is called whenever the user hits a key in keyboard.
+	key- holds the ASCII value of the key pressed.
+*/
+//int len2 = 0;
+//int len3 = 0;
+//int len4 = 0;
+//int len5 = 0;
+//int len6 = 0;
+//int len7 = 0;
+
+
+void iKeyboard(unsigned char key)
+{
+
+	//str[len]=key;
+	if(show_quadritic_equation==true && quadratic_equation_xx==true && len<=2)
+	{
+	str1[len]=key;
+	len++;
+	
+	}
+	if(show_quadritic_equation==true && quadratic_equation_x==true && len2<=2)
+	{
+	str2[len2]=key;
+	len2++;
+	}
+	if(show_quadritic_equation==true && quadratic_equation_==true && len3<=2)
+	{
+	str3[len3]=key;
+	len3++;
+	}
+	if(show_cubic_equation==true && cubic_equation_a==true && len4<=2)
+	{
+	str4[len4]=key;
+	len4++;
+	}
+	if(show_cubic_equation==true && cubic_equation_b==true && len5<=2)
+	{
+	str5[len5]=key;
+	len5++;
+	}
+	if(show_cubic_equation==true && cubic_equation_c==true && len6<=2)
+	{
+	str6[len6]=key;
+	len6++;
+	}
+	if(show_cubic_equation==true && cubic_equation_d==true && len7<=2)
+	{
+	str7[len7]=key;
+	len7++;
+	}
+	if(show_linear_equation==true && lin_a==true && len8<=2)
+	{
+	str8[len8]=key;
+	len8++;
+	}
+	if(show_linear_equation==true && lin_b==true && len9<=2)
+	{
+	str9[len9]=key;
+	len9++;
+	}
+	if(show_linear_equation==true && lin_c==true && len10<=2)
+	{
+	str10[len10]=key;
+	len10++;
+	}
+	if(show_linear_equation==true && lin_p==true && len11<=2)
+	{
+	str11[len11]=key;
+	len11++;
+	}
+	if(show_linear_equation==true && lin_q==true && len12<=2)
+	{
+	str12[len12]=key;
+	len12++;
+	}
+	if(show_linear_equation==true && lin_r==true && len13<=2)
+	{
+	str13[len13]=key;
+	len13++;
+	}
+	
+
+  if(key == '\b')
+	{
+		len=len-1;
+		len2=len2-1;
+		len3=len3-1;
+		len4=len4-1;
+		len5=len5-1;
+		len6=len6-1;
+		len7=len7-1;
+		len8=len8-1;
+		len9=len9-1;
+		len10=len10-1;
+		len11=len11-1;
+		len12=len12-1;
+		len13=len13-1;
+		//do something with 'q'
+		//exit(0);
+	}
+	//place your codes for other keys here
+
+}
+/*
+	function iSpecialKeyboard() is called whenver user hits special keys like-
+	function keys, home, end, pg up, pg down, arraows etc. you have to use
+	appropriate constants to detect them. A list is:
+	GLUT_KEY_F1, GLUT_KEY_F2, GLUT_KEY_F3, GLUT_KEY_F4, GLUT_KEY_F5, GLUT_KEY_F6,
+	GLUT_KEY_F7, GLUT_KEY_F8, GLUT_KEY_F9, GLUT_KEY_F10, GLUT_KEY_F11, GLUT_KEY_F12,
+	GLUT_KEY_LEFT, GLUT_KEY_UP, GLUT_KEY_RIGHT, GLUT_KEY_DOWN, GLUT_KEY_PAGE UP,
+	GLUT_KEY_PAGE DOWN, GLUT_KEY_HOME, GLUT_KEY_END, GLUT_KEY_INSERT
+*/
+void iSpecialKeyboard(unsigned char key)
+{
+
+	if(key == GLUT_KEY_END)
+	{
+		exit(0);
+	}
+	if((key == GLUT_KEY_DOWN)||(key == GLUT_KEY_PAGE_DOWN))
+	{
+
+	}
+	if((key == GLUT_KEY_UP)||(key == GLUT_KEY_PAGE_UP))
+	{
+
+	}
+	if(key == GLUT_KEY_LEFT)
+	{
+
+	}
+	if(key == GLUT_KEY_RIGHT)
+	{
+
+	}
+	//place your codes for other keys here
+}
+
+
+
+
+
+
+int main()
+{
+
+	iInitialize(1366, 768, "Equation Solver");
+
+
+	return 0;
+}
